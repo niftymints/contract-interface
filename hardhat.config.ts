@@ -22,7 +22,13 @@ task("deploy", "Deploy the smart contracts", async (args, hre) => {
   await hre.run("verify:verify", {
     address: smartContract.address,
     constructorArguments: [TOKEN_NAME, TOKEN_SYMBOL],
-  }).catch(e => console.log(e.message))
+  }).catch(e => {
+    if (e.message.toLowerCase().includes("already verified")) {
+      console.log("Verified!");
+    } else {
+      throw e;
+    }
+  });
 });
 
 async function txWait(txHash: string, confirmations: number, networkUrl: string) {
