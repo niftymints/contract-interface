@@ -26,7 +26,6 @@ import NFTManager from "@niftymints/contract-interface"
 * **deployContract** (tokenName: string, tokenSymbol: string): Promise<string> - Deploy `NFT.sol` with the given args. Returns the contract address.
 * **mintNFT** (contractAddress: string, tokenURI: string): Promise<string> - Mint a new NFT. Returns the transaction hash.
 * **verify** (contractAddress: string, ...args: any[]) - Verify the smart contract on the blockchain. Requires `POLYGONSCAN_KEY` environment variable to be set.
-* 
 
 ### Examples
 ##### Deploy a contract
@@ -65,7 +64,7 @@ async function mintNFT(tokenURI) {
 
 
 
-#### Local development
+### Local development
 ```
 npm i                   # install
 npx hardhat compile     # compile
