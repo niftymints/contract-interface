@@ -1,5 +1,5 @@
 {
-  "name": "@niftymints-art/contract-interface",
+  "name": "@niftymints/contract-interface",
   "version": "0.0.1",
   "main": "index.ts",
   "devDependencies": {
