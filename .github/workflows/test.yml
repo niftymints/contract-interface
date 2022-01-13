@@ -1,0 +1,24 @@
+name: Run tests
+
+on:
+  pull_request:
+    branches: [ main ]
+
+env:
+  POLYGONSCAN_KEY: ${{secrets.POLYGONSCAN_KEY}}
+  PRIVATE_KEY_DEV: ${{secrets.PRIVATE_KEY_DEV}}
+  PRIVATE_KEY_PROD: ${{secrets.PRIVATE_KEY_PROD}}
+  ALCHEMY_PROD_URL: ${{secrets.ALCHEMY_PROD_URL}}
+  ALCHEMY_DEV_URL: ${{secrets.ALCHEMY_DEV_URL}}
+  
+
+jobs:
+  test_pull_request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: npm ci
+      - run: npx hardhat test

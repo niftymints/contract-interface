@@ -1,0 +1,44 @@
+name: Deploy contracts
+
+on:
+  workflow_dispatch:
+    inputs:
+      DEPLOY_NETWORK:
+        description: Deploy network
+        required: true
+        type: choice
+        options:
+        - mumbai_dev
+        - matic_prod
+      TOKEN_NAME:
+        description: Contract name
+        required: true
+        default: Test NFT
+      TOKEN_SYMBOL:
+        description: Contract symbol
+        required: true
+        default: TNFT
+
+env:
+  POLYGONSCAN_KEY: ${{secrets.POLYGONSCAN_KEY}}
+  PRIVATE_KEY_DEV: ${{secrets.PRIVATE_KEY_DEV}}
+  PRIVATE_KEY_PROD: ${{secrets.PRIVATE_KEY_PROD}}
+  ALCHEMY_PROD_URL: ${{secrets.ALCHEMY_PROD_URL}}
+  ALCHEMY_DEV_URL: ${{secrets.ALCHEMY_DEV_URL}}
+
+jobs:
+  deploy:
+    # if: contains('[ $repo_owner , "username1", "username2"...]', github.actor)
+    if: contains('[ ${{github.repository_owner}} ]', github.actor)
+    runs-on: ubuntu-latest
+    env:
+      TOKEN_NAME: ${{ github.event.inputs.TOKEN_NAME }}
+      TOKEN_SYMBOL: ${{ github.event.inputs.TOKEN_SYMBOL }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: npm ci
+      - run: npx hardhat compile
+      - run: npx hardhat deploy --network ${{ github.event.inputs.DEPLOY_NETWORK }}
