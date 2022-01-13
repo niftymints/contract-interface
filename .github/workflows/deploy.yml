@@ -36,9 +36,8 @@ jobs:
       TOKEN_SYMBOL: ${{ github.event.inputs.TOKEN_SYMBOL }}
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: borales/actions-yarn@v2.3.0
         with:
-          node-version: 14
-      - run: npm ci
+          cmd: install
       - run: npx hardhat compile
       - run: npx hardhat deploy --network ${{ github.event.inputs.DEPLOY_NETWORK }}
