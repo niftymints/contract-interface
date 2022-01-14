@@ -31,7 +31,7 @@ const nft = new NFTManager("NFT", rpcUrl, privateKey);
 // nft2.connect(signer);
 ```
 
-#### connect (signer: Signer): void
+#### connect (signer: Signer): NFTManager
 Set the signer. Example:
 ```
 nft.connect(signer);
