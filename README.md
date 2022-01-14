@@ -49,6 +49,12 @@ Mint a new NFT belonging to the given artist. Returns the transaction hash. Exam
 const txHash = await nft.mintNFT(contractAddress, tokenURI, artist);
 ```
 
+#### getTokenID (txHash: string, contractAddress?: string): Promise&lt;string&gt;
+Get the ID of a minted NFT using the transaction hash. Optionally also accepts the contract address to make computation faster. Example:
+```
+const nftID = await nft.getTokenID(txHash, contractAddress);
+```
+
 #### txWait (txHash: string, confirmations: number): Promise&lt;void&gt;
 Wait for block confirmations of the transaction. Example:
 ```
