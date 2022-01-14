@@ -9,14 +9,14 @@ export default class NFTManager {
     /**
      * Create an instance of NFTManager
      * @param contractName Name of the smart contract (e.g. "NFT")
-     * @param _rpcUrl (optional) RPC url of the node
-     * @param _privateKey (optional) Private key of the account
+     * @param rpcUrl (optional) RPC url of the node
+     * @param privateKey (optional) Private key of the account
      */
-    public constructor(_contractName: string = "NFT", _rpcUrl?: string, _privateKey?: string) {
-        this.contractName = _contractName;
-        if (_rpcUrl && _privateKey) {
-            const provider = new ethers.providers.JsonRpcProvider(_rpcUrl);
-            this.signer = new ethers.Wallet(_privateKey, provider);
+    public constructor(contractName: string = "NFT", rpcUrl?: string, privateKey?: string) {
+        this.contractName = contractName;
+        if (rpcUrl && privateKey) {
+            const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+            this.signer = new ethers.Wallet(privateKey, provider);
         }
     }
 
