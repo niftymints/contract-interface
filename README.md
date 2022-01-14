@@ -22,10 +22,12 @@ import NFTManager from "@niftymints/contract-interface"
 ### Supported functions
 #### NFTManager
 * **constructor** (rpcURL: string, privateKey: string) - Optionally accepts rpc URL (Alchemy, Infura, etc.) and private key of wallet. If left blank, use ``connect`` function to assign a signer.
-* **connect** (signer: Signer): Set the signer
+* **connect** (signer: Signer): void - Set the signer
 * **deployContract** (tokenName: string, tokenSymbol: string): Promise<string> - Deploy `NFT.sol` with the given args. Returns the contract address.
-* **mintNFT** (contractAddress: string, tokenURI: string): Promise<string> - Mint a new NFT. Returns the transaction hash.
-* **verify** (contractAddress: string, ...args: any[]) - Verify the smart contract on the blockchain. Requires `POLYGONSCAN_KEY` environment variable to be set.
+* **mintNFT** (contractAddress: string, tokenURI: string, artist: string): Promise<string> - Mint a new NFT. Returns the transaction hash. The minted NFT is set to belong to the artist.
+* **getContract** (contractAddress: string): Promise<Contract> - Get the deployed instanced of a smart contract. Can be used to execute functions in the smart contract.
+* **txWait** (txHash: string, confirmations: number): Promise<void> - Wait for block confirmations of the transaction.
+* **verify** (contractAddress: string, ...args: any[]): Promise<void> - Verify the smart contract on the blockchain. Requires `POLYGONSCAN_KEY` environment variable to be set.
 
 ### Examples
 ##### Deploy a contract

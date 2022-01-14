@@ -1,5 +1,5 @@
 import { ethers, run } from "hardhat";
-import { Signer } from "ethers";
+import { Contract, Signer } from "ethers";
 import "@nomiclabs/hardhat-web3";
 
 export default class NFTManager {
@@ -69,17 +69,28 @@ export default class NFTManager {
      * @param contractAddress Address of the contract
      * @param tokenURI URI of the token
      */
-    public async mintNFT(contractAddress: string, tokenURI: string) {
+    public async mintNFT(contractAddress: string, tokenURI: string, artist: string) {
+        if (!this.signer) {
+            throw new Error("Signer is not set");
+        }
+        const contract = await this.getContract(contractAddress);
+
+        const tx = await contract.mint(tokenURI, artist);
+        return tx.hash;
+    }
+
+    /**
+     * Get the smart contract instance
+     * @param contractAddress Address of the contract
+     * @returns NFT contract instance
+     */
+    public async getContract(contractAddress: string): Promise<Contract> {
         if (!this.signer) {
             throw new Error("Signer is not set");
         }
 
         const NFT = (await ethers.getContractFactory("NFT")).connect(this.signer);
-        const contract = NFT.attach(contractAddress);
-
-        const tx = await contract.mint(tokenURI);
-        await this.txWait(tx.hash, 2);
-        return tx.hash;
+        return NFT.attach(contractAddress);
     }
 
     /**
@@ -87,7 +98,7 @@ export default class NFTManager {
      * @param txHash Transaction hash
      * @param confirmations Number of confirmations to wait for
      */
-    private async txWait(txHash: string, confirmations: number) {
+    public async txWait(txHash: string, confirmations: number) {
         const provider = this.signer.provider;
         const tx = await provider.getTransaction(txHash);
         let currentBlock = await provider.getBlockNumber();

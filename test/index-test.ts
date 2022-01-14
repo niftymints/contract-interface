@@ -32,8 +32,17 @@ describe("index.ts", function () {
         mineNBlocks(5);
         const address = await nft.deployContract("Test NFT", "TNFT");
         expect(address).to.not.equal(null);
-        const tx = await nft.mintNFT(address, tokenURI_1);
+        const tx = await nft.mintNFT(address, tokenURI_1, owner.address);
         expect(tx.hash).to.not.equal(null);
+    });
+
+    it("getContract should return the contract instance", async () => {
+        const nft = (new NFTManager()).connect(owner);
+        mineNBlocks(5);
+        const address = await nft.deployContract("Test NFT", "TNFT");
+        expect(address).to.not.equal(null);
+        const contract = await nft.getContract(address);
+        expect(contract).to.not.equal(null);
     });
 
     it.skip("verify should verify the contract on the blockchain", async () => {
