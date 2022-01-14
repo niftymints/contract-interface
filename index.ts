@@ -4,13 +4,16 @@ import "@nomiclabs/hardhat-web3";
 
 export default class NFTManager {
     private signer: any;
+    private contractName: string;
 
     /**
      * Create an instance of NFTManager
+     * @param contractName Name of the smart contract (e.g. "NFT")
      * @param _rpcUrl (optional) RPC url of the node
      * @param _privateKey (optional) Private key of the account
      */
-    public constructor(_rpcUrl?: string, _privateKey?: string) {
+    public constructor(_contractName: string = "NFT", _rpcUrl?: string, _privateKey?: string) {
+        this.contractName = _contractName;
         if (_rpcUrl && _privateKey) {
             const provider = new ethers.providers.JsonRpcProvider(_rpcUrl);
             this.signer = new ethers.Wallet(_privateKey, provider);
@@ -39,7 +42,7 @@ export default class NFTManager {
         }
 
         await run('compile');
-        const NFT = (await ethers.getContractFactory("NFT")).connect(this.signer);
+        const NFT = (await ethers.getContractFactory(this.contractName)).connect(this.signer);
         const contract = await NFT.deploy(tokenName, tokenSymbol);
 
         await contract.deployed();
@@ -89,7 +92,7 @@ export default class NFTManager {
             throw new Error("Signer is not set");
         }
 
-        const NFT = (await ethers.getContractFactory("NFT")).connect(this.signer);
+        const NFT = (await ethers.getContractFactory(this.contractName)).connect(this.signer);
         return NFT.attach(contractAddress);
     }
 

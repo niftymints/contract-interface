@@ -21,10 +21,13 @@ import NFTManager from "@niftymints/contract-interface"
 
 ### Supported functions
 #### NFTManager
-##### constructor (rpcURL?: string, privateKey?: string)
-Optionally accepts rpc URL (Alchemy, Infura, etc.) and private key of wallet. If left blank, use ``connect`` function to assign a signer. Example:
+##### constructor (contractName: string = "NFT", rpcURL?: string, privateKey?: string)
+Initialize the NFTManager with the name of the smart contract (default is "NFT"). Optionally also accepts rpc URL (Alchemy, Infura, etc.) and private key of wallet. If rpcURL and privateKey are left blank, use ``connect`` function to set a signer. Example:
 ```
-const nft = new NFTManager(rpcUrl, privateKey);
+const nft = new NFTManager("NFT", rpcUrl, privateKey);
+ 
+// or without any arguments:
+// const nft2 = new NFTManager();
 ```
 
 ##### connect (signer: Signer): void
@@ -73,7 +76,7 @@ const rpcURL = "<rpc-url>";
 const privateKey = "<wallet-key>";
 
 async function deploy() {
-    const nft = new NFTManager(rpcURL, privateKey);
+    const nft = new NFTManager("NFT", rpcURL, privateKey);
     const address = await nft.deployContract("Test NFT", "TNFT");
 }
 
@@ -91,7 +94,7 @@ const rpcURL = "<rpc-url>";
 const privateKey = "<wallet-key>";
 
 async function mintNFT(tokenURI) {
-    const nft = new NFTManager(rpcURL, privateKey);
+    const nft = new NFTManager("NFT", rpcURL, privateKey);
     const address = await nft.deployContract("Test NFT", "TNFT");
     const txHash = await nft.mintNFT(address, tokenURI);
     
