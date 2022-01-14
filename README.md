@@ -21,7 +21,7 @@ import NFTManager from "@niftymints/contract-interface"
 
 ### Supported functions
 #### NFTManager
-##### constructor (rpcURL: string, privateKey: string)
+##### constructor (rpcURL?: string, privateKey?: string)
 Optionally accepts rpc URL (Alchemy, Infura, etc.) and private key of wallet. If left blank, use ``connect`` function to assign a signer. Example:
 ```
 const nft = new NFTManager(rpcUrl, privateKey);
