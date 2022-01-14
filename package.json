@@ -1,15 +1,21 @@
 {
   "name": "@niftymints/contract-interface",
-  "version": "0.0.3",
-  "description": "Dynamically deploy NFT smart contracts and interact with it on the blockchain",
+  "version": "0.0.4",
+  "description": "Dynamically deploy and interact with NFT smart contracts on the blockchain",
   "main": "index.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/niftymints/contract-interface"
   },
   "keywords": [
-    "smart-contract",
-    "nft"
+    "smart-contracts",
+    "nft",
+    "ethereum",
+    "blockchain",
+    "solidity",
+    "dapps",
+    "typescript",
+    "tooling"
   ],
   "author": "Shanzid Shaiham",
   "license": "MIT",

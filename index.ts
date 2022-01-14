@@ -4,16 +4,19 @@ import "@nomiclabs/hardhat-web3";
 
 export default class NFTManager {
     private signer: any;
+    private contractName: string;
 
     /**
      * Create an instance of NFTManager
-     * @param _rpcUrl (optional) RPC url of the node
-     * @param _privateKey (optional) Private key of the account
+     * @param contractName Name of the smart contract (e.g. "NFT")
+     * @param rpcUrl (optional) RPC url of the node
+     * @param privateKey (optional) Private key of the account
      */
-    public constructor(_rpcUrl?: string, _privateKey?: string) {
-        if (_rpcUrl && _privateKey) {
-            const provider = new ethers.providers.JsonRpcProvider(_rpcUrl);
-            this.signer = new ethers.Wallet(_privateKey, provider);
+    public constructor(contractName: string = "NFT", rpcUrl?: string, privateKey?: string) {
+        this.contractName = contractName;
+        if (rpcUrl && privateKey) {
+            const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+            this.signer = new ethers.Wallet(privateKey, provider);
         }
     }
 
@@ -39,7 +42,7 @@ export default class NFTManager {
         }
 
         await run('compile');
-        const NFT = (await ethers.getContractFactory("NFT")).connect(this.signer);
+        const NFT = (await ethers.getContractFactory(this.contractName)).connect(this.signer);
         const contract = await NFT.deploy(tokenName, tokenSymbol);
 
         await contract.deployed();
@@ -89,7 +92,7 @@ export default class NFTManager {
             throw new Error("Signer is not set");
         }
 
-        const NFT = (await ethers.getContractFactory("NFT")).connect(this.signer);
+        const NFT = (await ethers.getContractFactory(this.contractName)).connect(this.signer);
         return NFT.attach(contractAddress);
     }
 
@@ -99,6 +102,10 @@ export default class NFTManager {
      * @param confirmations Number of confirmations to wait for
      */
     public async txWait(txHash: string, confirmations: number) {
+        if (!this.signer) {
+            throw new Error("Signer is not set");
+        }
+
         const provider = this.signer.provider;
         const tx = await provider.getTransaction(txHash);
         let currentBlock = await provider.getBlockNumber();
