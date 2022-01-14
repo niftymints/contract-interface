@@ -1,6 +1,6 @@
 {
   "name": "@niftymints/contract-interface",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.ts",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.4",
