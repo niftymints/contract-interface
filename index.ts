@@ -102,6 +102,10 @@ export default class NFTManager {
      * @param confirmations Number of confirmations to wait for
      */
     public async txWait(txHash: string, confirmations: number) {
+        if (!this.signer) {
+            throw new Error("Signer is not set");
+        }
+
         const provider = this.signer.provider;
         const tx = await provider.getTransaction(txHash);
         let currentBlock = await provider.getBlockNumber();
