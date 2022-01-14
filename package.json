@@ -8,8 +8,14 @@
     "url": "https://github.com/niftymints/contract-interface"
   },
   "keywords": [
-    "smart-contract",
-    "nft"
+    "smart-contracts",
+    "nft",
+    "ethereum",
+    "blockchain",
+    "solidity",
+    "dapps",
+    "typescript",
+    "tooling"
   ],
   "author": "Shanzid Shaiham",
   "license": "MIT",
