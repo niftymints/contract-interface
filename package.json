@@ -1,7 +1,18 @@
 {
   "name": "@niftymints/contract-interface",
-  "version": "0.0.2",
+  "version": "0.0.3",
+  "description": "Dynamically deploy NFT smart contracts and interact with it on the blockchain",
   "main": "index.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/niftymints/contract-interface"
+  },
+  "keywords": [
+    "smart-contract",
+    "nft"
+  ],
+  "author": "Shanzid Shaiham",
+  "license": "MIT",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.4",
     "@nomiclabs/hardhat-etherscan": "^3.0.0",
