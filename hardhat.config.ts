@@ -1,7 +1,7 @@
 import { task } from "hardhat/config";
-import Web3 from "web3";
 import "@nomiclabs/hardhat-waffle";
 import "@nomiclabs/hardhat-etherscan";
+import "@nomiclabs/hardhat-web3";
 import * as dotenv from "dotenv";
 dotenv.config();
 
@@ -15,7 +15,7 @@ task("deploy", "Deploy the smart contracts", async (args, hre) => {
   const smartContract = await NFT.deploy(TOKEN_NAME, TOKEN_SYMBOL);
   await smartContract.deployed();
 
-  await txWait(smartContract.deployTransaction.hash, 5, (hre.network.config as any).url);
+  await txWait(smartContract.deployTransaction.hash, 5, hre.web3);
 
   console.log(`Deployed contact at ${smartContract.address}`);
 
@@ -31,9 +31,8 @@ task("deploy", "Deploy the smart contracts", async (args, hre) => {
   });
 });
 
-async function txWait(txHash: string, confirmations: number, networkUrl: string) {
-  const web3 = new Web3(networkUrl) as any;
-  const tx = await web3.eth.getTransaction(txHash);
+async function txWait(txHash: string, confirmations: number, web3: any) {
+  const tx = await web3.eth.getTransaction(txHash) as any;
   let currentBlock = await web3.eth.getBlockNumber();
   while (currentBlock - tx.blockNumber < confirmations) {
     await new Promise(resolve => setTimeout(resolve, 1000));

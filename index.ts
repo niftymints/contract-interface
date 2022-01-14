@@ -1,6 +1,5 @@
-import { ethers, run } from "hardhat";
+import { ethers, run, artifacts, web3 } from "hardhat";
 import { Contract, Signer } from "ethers";
-import "@nomiclabs/hardhat-web3";
 
 export default class NFTManager {
     private signer: any;
@@ -72,7 +71,7 @@ export default class NFTManager {
      * @param contractAddress Address of the contract
      * @param tokenURI URI of the token
      */
-    public async mintNFT(contractAddress: string, tokenURI: string, artist: string) {
+    public async mintNFT(contractAddress: string, tokenURI: string, artist: string): Promise<string> {
         if (!this.signer) {
             throw new Error("Signer is not set");
         }
@@ -80,6 +79,29 @@ export default class NFTManager {
 
         const tx = await contract.mint(tokenURI, artist);
         return tx.hash;
+    }
+
+    /**
+     * Get the token ID associated with a transaction
+     * @param txHash Transaction hash
+     * @param contractAddress (Optional) Address of the contract
+     * @returns The token ID associated with the transaction hash
+     */
+    public async getTokenID(txHash: string, contractAddress?: string): Promise<string> {
+        if (contractAddress == null) {
+            contractAddress = (await this.signer.provider.getTransaction(txHash)).to;
+        }
+        const abi = (await artifacts.readArtifact(this.contractName)).abi;
+        const web3Contract = new web3.eth.Contract(abi, contractAddress);
+        const events = await web3Contract.getPastEvents("Transfer", {
+            fromBlock: 0,
+            toBlock: 'latest'
+        });
+        const event = events.find(e => e.transactionHash === txHash);
+        if (event == null || event.returnValues.tokenId == null) {
+            throw new Error("Event not found");
+        }
+        return event.returnValues.tokenId;
     }
 
     /**

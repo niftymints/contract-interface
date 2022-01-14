@@ -1,6 +1,6 @@
 {
   "name": "@niftymints/contract-interface",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Dynamically deploy and interact with NFT smart contracts on the blockchain",
   "main": "index.ts",
   "repository": {
