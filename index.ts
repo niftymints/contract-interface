@@ -1,6 +1,6 @@
 import "@nomiclabs/hardhat-ethers";
 import "@nomiclabs/hardhat-web3";
-import * as hre from "hardhat";
+import hre from "hardhat";
 import { Contract, Signer } from "ethers";
 
 export default class NFTManager {
