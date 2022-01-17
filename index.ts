@@ -1,6 +1,4 @@
-import "@nomiclabs/hardhat-ethers";
-import "@nomiclabs/hardhat-web3";
-import hre from "hardhat";
+import { ethers, web3, run, artifacts } from "hardhat";
 import { Contract, Signer } from "ethers";
 
 export default class NFTManager {
@@ -20,8 +18,8 @@ export default class NFTManager {
   ) {
     this.contractName = contractName;
     if (rpcUrl && privateKey) {
-      const provider = new hre.ethers.providers.JsonRpcProvider(rpcUrl);
-      this.signer = new hre.ethers.Wallet(privateKey, provider);
+      const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
+      this.signer = new ethers.Wallet(privateKey, provider);
     }
   }
 
@@ -49,10 +47,10 @@ export default class NFTManager {
       throw new Error("Signer is not set");
     }
 
-    await hre.run("compile");
-    const NFT = (
-      await hre.ethers.getContractFactory(this.contractName)
-    ).connect(this.signer);
+    await run("compile");
+    const NFT = (await ethers.getContractFactory(this.contractName)).connect(
+      this.signer
+    );
     const contract = await NFT.deploy(tokenName, tokenSymbol);
 
     await contract.deployed();
@@ -67,16 +65,14 @@ export default class NFTManager {
    * @param args Arguments of the function
    */
   public async verify(contractAddress: string, ...args: any[]) {
-    await hre
-      .run("verify:verify", {
-        address: contractAddress,
-        constructorArguments: args,
-      })
-      .catch((e: Error) => {
-        if (!e.message.toLowerCase().includes("already verified")) {
-          throw e;
-        }
-      });
+    await run("verify:verify", {
+      address: contractAddress,
+      constructorArguments: args,
+    }).catch((e: Error) => {
+      if (!e.message.toLowerCase().includes("already verified")) {
+        throw e;
+      }
+    });
   }
 
   /**
@@ -111,8 +107,8 @@ export default class NFTManager {
     if (contractAddress == null) {
       contractAddress = (await this.signer.provider.getTransaction(txHash)).to;
     }
-    const abi = (await hre.artifacts.readArtifact(this.contractName)).abi;
-    const web3Contract = new hre.web3.eth.Contract(abi, contractAddress);
+    const abi = (await artifacts.readArtifact(this.contractName)).abi;
+    const web3Contract = new web3.eth.Contract(abi, contractAddress);
     const events = await web3Contract.getPastEvents("Transfer", {
       fromBlock: 0,
       toBlock: "latest",
@@ -134,9 +130,9 @@ export default class NFTManager {
       throw new Error("Signer is not set");
     }
 
-    const NFT = (
-      await hre.ethers.getContractFactory(this.contractName)
-    ).connect(this.signer);
+    const NFT = (await ethers.getContractFactory(this.contractName)).connect(
+      this.signer
+    );
     return NFT.attach(contractAddress);
   }
 

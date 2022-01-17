@@ -2,6 +2,7 @@ import { task } from "hardhat/config";
 import "@nomiclabs/hardhat-waffle";
 import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-web3";
+import "@nomiclabs/hardhat-ethers";
 import * as dotenv from "dotenv";
 dotenv.config();
 
@@ -19,23 +20,25 @@ task("deploy", "Deploy the smart contracts", async (args, hre) => {
 
   console.log(`Deployed contact at ${smartContract.address}`);
 
-  await hre.run("verify:verify", {
-    address: smartContract.address,
-    constructorArguments: [TOKEN_NAME, TOKEN_SYMBOL],
-  }).catch(e => {
-    if (e.message.toLowerCase().includes("already verified")) {
-      console.log("Verified!");
-    } else {
-      throw e;
-    }
-  });
+  await hre
+    .run("verify:verify", {
+      address: smartContract.address,
+      constructorArguments: [TOKEN_NAME, TOKEN_SYMBOL],
+    })
+    .catch((e) => {
+      if (e.message.toLowerCase().includes("already verified")) {
+        console.log("Verified!");
+      } else {
+        throw e;
+      }
+    });
 });
 
 async function txWait(txHash: string, confirmations: number, web3: any) {
-  const tx = await web3.eth.getTransaction(txHash) as any;
+  const tx = (await web3.eth.getTransaction(txHash)) as any;
   let currentBlock = await web3.eth.getBlockNumber();
   while (currentBlock - tx.blockNumber < confirmations) {
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     currentBlock = await web3.eth.getBlockNumber();
   }
 }
@@ -46,19 +49,19 @@ export default {
     settings: {
       optimizer: {
         enabled: true,
-        runs: 200
-      }
-    }
+        runs: 200,
+      },
+    },
   },
   networks: {
     mumbai_dev: {
       url: process.env.ALCHEMY_DEV_URL ?? "https://rpc-mumbai.maticvigil.com",
-      accounts: [process.env.PRIVATE_KEY_DEV]
+      accounts: [process.env.PRIVATE_KEY_DEV],
     },
     matic_prod: {
       url: process.env.ALCHEMY_PROD_URL,
       accounts: [process.env.PRIVATE_KEY_PROD],
-    }
+    },
   },
   etherscan: {
     apiKey: process.env.POLYGONSCAN_KEY,
@@ -67,9 +70,9 @@ export default {
     sources: "./contracts",
     tests: "./test",
     cache: "./cache",
-    artifacts: "./artifacts"
+    artifacts: "./artifacts",
   },
   mocha: {
-    timeout: 20000
-  }
+    timeout: 20000,
+  },
 };
