@@ -1,12 +1,13 @@
 {
   "name": "@niftymints/contract-interface",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "description": "Dynamically deploy and interact with NFT smart contracts on the blockchain",
   "main": "index.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/niftymints/contract-interface"
   },
+  "homepage": "https://niftymints.art",
   "keywords": [
     "smart-contracts",
     "nft",
