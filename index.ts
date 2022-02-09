@@ -41,17 +41,17 @@ export default class NFTManager {
    */
   public async deployContract(
     tokenName: string,
-    tokenSymbol: string
+    tokenSymbol: string,
+    owner: string
   ): Promise<string> {
     if (!this.signer) {
       throw new Error("Signer is not set");
     }
 
-    await run("compile");
     const NFT = (await ethers.getContractFactory(this.contractName)).connect(
       this.signer
     );
-    const contract = await NFT.deploy(tokenName, tokenSymbol);
+    const contract = await NFT.deploy(tokenName, tokenSymbol, owner);
 
     await contract.deployed();
     await this.txWait(contract.deployTransaction.hash, 2);

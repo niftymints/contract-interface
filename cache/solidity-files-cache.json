@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/shanzid/Code/niftymints.art/contract-interface/contracts/NFT.sol": {
-      "lastModificationDate": 1642451481522,
-      "contentHash": "29041d348676bd253587020d40818516",
+      "lastModificationDate": 1644427944911,
+      "contentHash": "17bfc05a2005b4503a12429627b58235",
       "sourceName": "contracts/NFT.sol",
       "solcConfig": {
         "version": "0.8.9",
@@ -29,7 +29,7 @@
         }
       },
       "imports": [
-        "@openzeppelin/contracts/access/Ownable.sol",
+        "./Ownable.sol",
         "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol"
       ],
       "versionPragmas": [
@@ -440,6 +440,43 @@
       ],
       "artifacts": [
         "IERC165"
+      ]
+    },
+    "/Users/shanzid/Code/niftymints.art/contract-interface/contracts/Ownable.sol": {
+      "lastModificationDate": 1644428051436,
+      "contentHash": "03b88c43f7f9c65f85e60f38bf7377c8",
+      "sourceName": "contracts/Ownable.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/utils/Context.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Ownable"
       ]
     }
   }

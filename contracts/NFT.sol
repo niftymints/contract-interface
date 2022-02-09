@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.9;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "./Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
 contract NFT is ERC721URIStorage, Ownable {
@@ -9,9 +9,11 @@ contract NFT is ERC721URIStorage, Ownable {
     mapping(address => bool) public minters;
     mapping(uint256 => address) private _artists;
 
-    constructor(string memory _name, string memory _symbol)
-        ERC721(_name, _symbol)
-    {
+    constructor(
+        string memory _name,
+        string memory _symbol,
+        address _owner
+    ) ERC721(_name, _symbol) Ownable(_owner) {
         currentSupply = 0;
         minters[msg.sender] = true;
     }

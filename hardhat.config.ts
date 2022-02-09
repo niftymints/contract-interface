@@ -9,11 +9,12 @@ dotenv.config();
 task("deploy", "Deploy the smart contracts", async (args, hre) => {
   const TOKEN_NAME = process.env.TOKEN_NAME ?? "Test NFT";
   const TOKEN_SYMBOL = process.env.TOKEN_SYMBOL ?? "TNFT";
+  const OWNER = process.env.OWNER ?? "0x" + "0".repeat(40);
 
   console.log(`Deploying ${TOKEN_NAME} with symbol ${TOKEN_SYMBOL}`);
 
   const NFT = await hre.ethers.getContractFactory("NFT");
-  const smartContract = await NFT.deploy(TOKEN_NAME, TOKEN_SYMBOL);
+  const smartContract = await NFT.deploy(TOKEN_NAME, TOKEN_SYMBOL, OWNER);
   await smartContract.deployed();
 
   await txWait(smartContract.deployTransaction.hash, 5, hre.web3);
@@ -23,7 +24,7 @@ task("deploy", "Deploy the smart contracts", async (args, hre) => {
   await hre
     .run("verify:verify", {
       address: smartContract.address,
-      constructorArguments: [TOKEN_NAME, TOKEN_SYMBOL],
+      constructorArguments: [TOKEN_NAME, TOKEN_SYMBOL, OWNER],
     })
     .catch((e) => {
       if (e.message.toLowerCase().includes("already verified")) {
