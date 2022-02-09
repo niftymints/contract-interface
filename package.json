@@ -1,12 +1,13 @@
 {
   "name": "@niftymints/contract-interface",
-  "version": "0.0.5",
+  "version": "0.1.5",
   "description": "Dynamically deploy and interact with NFT smart contracts on the blockchain",
   "main": "index.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/niftymints/contract-interface"
   },
+  "homepage": "https://niftymints.art",
   "keywords": [
     "smart-contracts",
     "nft",
@@ -19,24 +20,24 @@
   ],
   "author": "Shanzid Shaiham",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.4",
     "@nomiclabs/hardhat-etherscan": "^3.0.0",
-    "@nomiclabs/hardhat-waffle": "^2.0.1",
     "@nomiclabs/hardhat-web3": "^2.0.0",
+    "@openzeppelin/contracts": "^4.4.2",
     "@types/chai": "^4.3.0",
     "@types/mocha": "^9.0.0",
     "@types/node": "^17.0.8",
-    "chai": "^4.3.4",
-    "ethereum-waffle": "^3.4.0",
+    "dotenv": "^11.0.0",
     "ethers": "^5.5.3",
     "hardhat": "^2.8.2",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.5.4",
     "web3": "^1.6.1"
   },
-  "dependencies": {
-    "@openzeppelin/contracts": "^4.4.2",
-    "dotenv": "^11.0.0"
+  "devDependencies": {
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "chai": "^4.3.4",
+    "ethereum-waffle": "^3.4.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
   }
 }
