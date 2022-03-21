@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/shanzid/Code/niftymints.art/contract-interface/contracts/NFT.sol": {
-      "lastModificationDate": 1644427944911,
-      "contentHash": "17bfc05a2005b4503a12429627b58235",
+      "lastModificationDate": 1647845484378,
+      "contentHash": "ba213a2c24620f39b7a602bf0d398863",
       "sourceName": "contracts/NFT.sol",
       "solcConfig": {
         "version": "0.8.9",
