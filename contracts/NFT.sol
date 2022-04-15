@@ -7,6 +7,13 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 contract NFT is ERC721URIStorage, Ownable {
     uint256 public currentSupply;
     mapping(address => bool) public minters;
+    mapping(string => uint256) private uris;
+
+    event SimulatedTransfer(
+        address indexed from,
+        address indexed to,
+        uint256 indexed tokenId
+    );
 
     constructor(
         string memory _name,
@@ -29,9 +36,14 @@ contract NFT is ERC721URIStorage, Ownable {
         public
         onlyAuthorized
     {
+        if (uris[_tokenURI] != 0) {
+            emit SimulatedTransfer(artist, artist, uris[_tokenURI]);
+            return;
+        }
         uint256 tokenId = currentSupply;
         _safeMint(artist, tokenId);
         _setTokenURI(tokenId, _tokenURI);
+        uris[_tokenURI] = tokenId;
 
         currentSupply++;
     }
