@@ -513,6 +513,42 @@
       "artifacts": [
         "ContextMixin"
       ]
+    },
+    "/Users/shanzid/Code/niftymints.art/contract-interface/contracts/TokenMigrator.sol": {
+      "lastModificationDate": 1650905793882,
+      "contentHash": "5647b09a316014c01f4f59fcd9995d21",
+      "sourceName": "contracts/TokenMigrator.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.9"
+      ],
+      "artifacts": [
+        "INFT",
+        "TokenMigrator"
+      ]
     }
   }
 }
