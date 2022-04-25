@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.9;
 
-interface NFT {
+interface INFT {
     function safeTransferFrom(
         address _from,
         address _to,
@@ -21,7 +21,7 @@ contract TokenMigrator {
         uint256 startTokenID,
         uint256 endTokenID
     ) public {
-        NFT nft = NFT(contractAddress);
+        INFT nft = INFT(contractAddress);
         require(
             startTokenID <= endTokenID,
             "startTokenID must be less or equal to endTokenID"
