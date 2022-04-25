@@ -6,7 +6,7 @@ import "@nomiclabs/hardhat-ethers";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-task("deploy", "Deploy the smart contracts", async (args, hre) => {
+task("deploy_NFT", "Deploy the smart contracts", async (args, hre) => {
   const TOKEN_NAME = process.env.TOKEN_NAME ?? "Niftymints";
   const TOKEN_SYMBOL = process.env.TOKEN_SYMBOL ?? "NFTY";
   const OWNER = process.env.OWNER ?? "0x" + "0".repeat(40);

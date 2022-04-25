@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/shanzid/Code/niftymints.art/contract-interface/contracts/NFT.sol": {
-      "lastModificationDate": 1650015239993,
-      "contentHash": "abd5f8aa78ad61395e707b7ddf2bcf84",
+      "lastModificationDate": 1650904184068,
+      "contentHash": "dfaf9534344c52fe01fe4bbedef3b194",
       "sourceName": "contracts/NFT.sol",
       "solcConfig": {
         "version": "0.8.9",
@@ -479,10 +479,10 @@
         "Ownable"
       ]
     },
-    "/Users/shanzid/Code/niftymints.art/contract-interface/contracts/TokenMigrator.sol": {
-      "lastModificationDate": 1650609063507,
-      "contentHash": "5ee2aed3bdc78c7b6cbbbb748afa77c8",
-      "sourceName": "contracts/TokenMigrator.sol",
+    "/Users/shanzid/Code/niftymints.art/contract-interface/contracts/ContextMixin.sol": {
+      "lastModificationDate": 1650901878110,
+      "contentHash": "37d24486f381ad1c2c1129822f7c32df",
+      "sourceName": "contracts/ContextMixin.sol",
       "solcConfig": {
         "version": "0.8.9",
         "settings": {
@@ -511,8 +511,7 @@
         "0.8.9"
       ],
       "artifacts": [
-        "NFT",
-        "TokenMigrator"
+        "ContextMixin"
       ]
     }
   }
