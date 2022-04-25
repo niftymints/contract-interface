@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/shanzid/Code/niftymints.art/contract-interface/contracts/NFT.sol": {
-      "lastModificationDate": 1650015239993,
-      "contentHash": "abd5f8aa78ad61395e707b7ddf2bcf84",
+      "lastModificationDate": 1650904184068,
+      "contentHash": "dfaf9534344c52fe01fe4bbedef3b194",
       "sourceName": "contracts/NFT.sol",
       "solcConfig": {
         "version": "0.8.9",
@@ -477,6 +477,77 @@
       ],
       "artifacts": [
         "Ownable"
+      ]
+    },
+    "/Users/shanzid/Code/niftymints.art/contract-interface/contracts/ContextMixin.sol": {
+      "lastModificationDate": 1650901878110,
+      "contentHash": "37d24486f381ad1c2c1129822f7c32df",
+      "sourceName": "contracts/ContextMixin.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.9"
+      ],
+      "artifacts": [
+        "ContextMixin"
+      ]
+    },
+    "/Users/shanzid/Code/niftymints.art/contract-interface/contracts/TokenMigrator.sol": {
+      "lastModificationDate": 1650905793882,
+      "contentHash": "5647b09a316014c01f4f59fcd9995d21",
+      "sourceName": "contracts/TokenMigrator.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.9"
+      ],
+      "artifacts": [
+        "INFT",
+        "TokenMigrator"
       ]
     }
   }

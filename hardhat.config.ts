@@ -6,7 +6,7 @@ import "@nomiclabs/hardhat-ethers";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-task("deploy", "Deploy the smart contracts", async (args, hre) => {
+task("deploy_NFT", "Deploy the smart contracts", async (args, hre) => {
   const TOKEN_NAME = process.env.TOKEN_NAME ?? "Niftymints";
   const TOKEN_SYMBOL = process.env.TOKEN_SYMBOL ?? "NFTY";
   const OWNER = process.env.OWNER ?? "0x" + "0".repeat(40);
@@ -34,6 +34,32 @@ task("deploy", "Deploy the smart contracts", async (args, hre) => {
       }
     });
 });
+
+task(
+  "deploy_token_migrator",
+  "Deploy the smart contract for Token Migrator",
+  async (args, hre) => {
+    const TokenMigrator = await hre.ethers.getContractFactory("TokenMigrator");
+    const smartContract = await TokenMigrator.deploy();
+    await smartContract.deployed();
+
+    await txWait(smartContract.deployTransaction.hash, 5, hre.web3);
+
+    console.log(`Deployed contact at ${smartContract.address}`);
+
+    await hre
+      .run("verify:verify", {
+        address: smartContract.address,
+      })
+      .catch((e) => {
+        if (e.message.toLowerCase().includes("already verified")) {
+          console.log("Verified!");
+        } else {
+          throw e;
+        }
+      });
+  }
+);
 
 async function txWait(txHash: string, confirmations: number, web3: any) {
   const tx = (await web3.eth.getTransaction(txHash)) as any;
