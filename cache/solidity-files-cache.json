@@ -586,6 +586,42 @@
       "artifacts": [
         "CloneCollection"
       ]
+    },
+    "/Users/shanzid/Code/niftymints.art/contract-interface/contracts/AirdropTokens.sol": {
+      "lastModificationDate": 1654223133905,
+      "contentHash": "75e894be25df030d563d6981768bf097",
+      "sourceName": "contracts/AirdropTokens.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.9"
+      ],
+      "artifacts": [
+        "AirdropTokens",
+        "INFT"
+      ]
     }
   }
 }
