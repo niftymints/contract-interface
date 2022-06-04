@@ -2,9 +2,11 @@
 pragma solidity 0.8.9;
 
 import "./Ownable.sol";
+import "./ContextMixin.sol";
+import "./NativeMetaTransaction.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
-contract NFT is ERC721URIStorage, Ownable {
+contract NFT is ERC721URIStorage, Ownable, ContextMixin, NativeMetaTransaction {
     uint256 public currentSupply;
     address deployer;
     mapping(string => uint256) private uris;
@@ -23,6 +25,7 @@ contract NFT is ERC721URIStorage, Ownable {
     ) ERC721(_name, _symbol) Ownable(_owner) {
         currentSupply = 1;
         deployer = msg.sender;
+        _initializeEIP712(_name);
     }
 
     modifier onlyAuthorized() {
@@ -83,5 +86,9 @@ contract NFT is ERC721URIStorage, Ownable {
 
     function setRevealOnTransfer(bool _revealOnTransfer) public onlyAuthorized {
         revealOnTransfer = _revealOnTransfer;
+    }
+
+    function _msgSender() internal view override returns (address sender) {
+        return ContextMixin.msgSender();
     }
 }

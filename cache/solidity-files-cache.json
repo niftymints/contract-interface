@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/shanzid/Code/niftymints.art/contract-interface/contracts/NFT.sol": {
-      "lastModificationDate": 1653262005322,
-      "contentHash": "8c620203ac45f6c4f4e5603c340d8385",
+      "lastModificationDate": 1654367209470,
+      "contentHash": "a75b43fa16a4ea4f45f1f565f63c99fa",
       "sourceName": "contracts/NFT.sol",
       "solcConfig": {
         "version": "0.8.9",
@@ -30,6 +30,8 @@
       },
       "imports": [
         "./Ownable.sol",
+        "./ContextMixin.sol",
+        "./NativeMetaTransaction.sol",
         "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol"
       ],
       "versionPragmas": [
@@ -480,7 +482,7 @@
       ]
     },
     "/Users/shanzid/Code/niftymints.art/contract-interface/contracts/ContextMixin.sol": {
-      "lastModificationDate": 1650901878110,
+      "lastModificationDate": 1654364877697,
       "contentHash": "37d24486f381ad1c2c1129822f7c32df",
       "sourceName": "contracts/ContextMixin.sol",
       "solcConfig": {
@@ -621,6 +623,43 @@
       "artifacts": [
         "AirdropTokens",
         "INFT"
+      ]
+    },
+    "/Users/shanzid/Code/niftymints.art/contract-interface/contracts/NativeMetaTransaction.sol": {
+      "lastModificationDate": 1654365547081,
+      "contentHash": "c53f6622cb0a9c86d5a00781977660d9",
+      "sourceName": "contracts/NativeMetaTransaction.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.9"
+      ],
+      "artifacts": [
+        "EIP712Base",
+        "Initializable",
+        "NativeMetaTransaction"
       ]
     }
   }
