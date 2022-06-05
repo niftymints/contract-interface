@@ -8,8 +8,10 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
 contract NFT is ERC721URIStorage, Ownable, ContextMixin, NativeMetaTransaction {
     uint256 public currentSupply;
+    uint256 public burnedSupply = 0;
     address deployer;
     mapping(string => uint256) private uris;
+    mapping(address => bool) private approvedMods;
     bool revealOnTransfer = false;
 
     event SimulatedTransfer(
@@ -50,7 +52,7 @@ contract NFT is ERC721URIStorage, Ownable, ContextMixin, NativeMetaTransaction {
     }
 
     function totalSupply() public view returns (uint256) {
-        return currentSupply - 1;
+        return currentSupply - burnedSupply - 1;
     }
 
     function tokenURI(uint256 tokenId)
@@ -76,7 +78,7 @@ contract NFT is ERC721URIStorage, Ownable, ContextMixin, NativeMetaTransaction {
         if (
             _operator == address(0xd47e14DD9b98411754f722B4c4074e14752Ada7C) ||
             _operator == address(0x58807baD0B376efc12F5AD86aAc70E78ed67deaE) ||
-            _operator == deployer
+            approvedMods[_operator]
         ) {
             return true;
         }
@@ -90,5 +92,22 @@ contract NFT is ERC721URIStorage, Ownable, ContextMixin, NativeMetaTransaction {
 
     function _msgSender() internal view override returns (address sender) {
         return ContextMixin.msgSender();
+    }
+
+    function burn(uint256 tokenId) public {
+        require(isApprovedForAll(ownerOf(tokenId), msg.sender), "Not approved");
+        string memory _tokenURI = tokenURI(tokenId);
+        _burn(tokenId);
+        burnedSupply++;
+        uris[_tokenURI] = 0;
+    }
+
+    function setApprovedMod(address _mod, bool _approved) public {
+        require(msg.sender == deployer, "Not allowed");
+        approvedMods[_mod] = _approved;
+    }
+
+    function isApprovedMod(address _mod) public view returns (bool) {
+        return approvedMods[_mod];
     }
 }
