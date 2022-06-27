@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/Users/shanzid/Code/niftymints.art/contract-interface/contracts/NFT.sol": {
-      "lastModificationDate": 1650904184068,
-      "contentHash": "dfaf9534344c52fe01fe4bbedef3b194",
+      "lastModificationDate": 1656344340472,
+      "contentHash": "7807e037986f71c32c8f7bfedd678c32",
       "sourceName": "contracts/NFT.sol",
       "solcConfig": {
         "version": "0.8.9",
@@ -30,6 +30,8 @@
       },
       "imports": [
         "./Ownable.sol",
+        "./ContextMixin.sol",
+        "./NativeMetaTransaction.sol",
         "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol"
       ],
       "versionPragmas": [
@@ -480,7 +482,7 @@
       ]
     },
     "/Users/shanzid/Code/niftymints.art/contract-interface/contracts/ContextMixin.sol": {
-      "lastModificationDate": 1650901878110,
+      "lastModificationDate": 1654364877697,
       "contentHash": "37d24486f381ad1c2c1129822f7c32df",
       "sourceName": "contracts/ContextMixin.sol",
       "solcConfig": {
@@ -548,6 +550,116 @@
       "artifacts": [
         "INFT",
         "TokenMigrator"
+      ]
+    },
+    "/Users/shanzid/Code/niftymints.art/contract-interface/contracts/CloneCollection.sol": {
+      "lastModificationDate": 1653144965341,
+      "contentHash": "9aa3a79feccd0e721362aa9175e3f61e",
+      "sourceName": "contracts/CloneCollection.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./NFT.sol"
+      ],
+      "versionPragmas": [
+        "0.8.9"
+      ],
+      "artifacts": [
+        "CloneCollection"
+      ]
+    },
+    "/Users/shanzid/Code/niftymints.art/contract-interface/contracts/AirdropTokens.sol": {
+      "lastModificationDate": 1654223133905,
+      "contentHash": "75e894be25df030d563d6981768bf097",
+      "sourceName": "contracts/AirdropTokens.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.9"
+      ],
+      "artifacts": [
+        "AirdropTokens",
+        "INFT"
+      ]
+    },
+    "/Users/shanzid/Code/niftymints.art/contract-interface/contracts/NativeMetaTransaction.sol": {
+      "lastModificationDate": 1654365547081,
+      "contentHash": "c53f6622cb0a9c86d5a00781977660d9",
+      "sourceName": "contracts/NativeMetaTransaction.sol",
+      "solcConfig": {
+        "version": "0.8.9",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.9"
+      ],
+      "artifacts": [
+        "EIP712Base",
+        "Initializable",
+        "NativeMetaTransaction"
       ]
     }
   }

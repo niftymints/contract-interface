@@ -61,6 +61,62 @@ task(
   }
 );
 
+task(
+  "deploy_clone_collection",
+  "Deploy the smart contract for Collection Cloner",
+  async (args, hre) => {
+    const CloneContract = await hre.ethers.getContractFactory(
+      "CloneCollection"
+    );
+    const smartContract = await CloneContract.deploy();
+    await smartContract.deployed();
+
+    await txWait(smartContract.deployTransaction.hash, 5, hre.web3);
+
+    console.log(`Deployed contact at ${smartContract.address}`);
+
+    await hre
+      .run("verify:verify", {
+        address: smartContract.address,
+      })
+      .catch((e) => {
+        if (e.message.toLowerCase().includes("already verified")) {
+          console.log("Verified!");
+        } else {
+          throw e;
+        }
+      });
+  }
+);
+
+task(
+  "deploy_airdrop_tokens",
+  "Deploy the smart contract for Airdropping tokens",
+  async (args, hre) => {
+    const AirdropperContract = await hre.ethers.getContractFactory(
+      "AirdropTokens"
+    );
+    const smartContract = await AirdropperContract.deploy();
+    await smartContract.deployed();
+
+    await txWait(smartContract.deployTransaction.hash, 5, hre.web3);
+
+    console.log(`Deployed contact at ${smartContract.address}`);
+
+    await hre
+      .run("verify:verify", {
+        address: smartContract.address,
+      })
+      .catch((e) => {
+        if (e.message.toLowerCase().includes("already verified")) {
+          console.log("Verified!");
+        } else {
+          throw e;
+        }
+      });
+  }
+);
+
 async function txWait(txHash: string, confirmations: number, web3: any) {
   const tx = (await web3.eth.getTransaction(txHash)) as any;
   let currentBlock = await web3.eth.getBlockNumber();
