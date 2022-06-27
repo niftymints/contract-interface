@@ -10,6 +10,7 @@ contract NFT is ERC721URIStorage, Ownable, ContextMixin, NativeMetaTransaction {
     uint256 public currentSupply;
     uint256 public burnedSupply = 0;
     address deployer;
+    string private _defaultURI = "";
     mapping(string => uint256) private uris;
     mapping(address => bool) private approvedMods;
     bool revealOnTransfer = false;
@@ -51,6 +52,12 @@ contract NFT is ERC721URIStorage, Ownable, ContextMixin, NativeMetaTransaction {
         currentSupply++;
     }
 
+    function updateTokenURI(uint256 _tokenId, string memory _tokenURI) public {
+        require(approvedMods[msg.sender], "Unauthorized access");
+        require(_exists(_tokenId), "Token does not exist");
+        _setTokenURI(_tokenId, _tokenURI);
+    }
+
     function totalSupply() public view returns (uint256) {
         return currentSupply - burnedSupply - 1;
     }
@@ -63,9 +70,13 @@ contract NFT is ERC721URIStorage, Ownable, ContextMixin, NativeMetaTransaction {
         returns (string memory)
     {
         if (revealOnTransfer && ownerOf(tokenId) == owner()) {
-            return "";
+            return _defaultURI;
         }
         return super.tokenURI(tokenId);
+    }
+
+    function setDefaultTokenURI(string memory _tokenURI) public onlyAuthorized {
+        _defaultURI = _tokenURI;
     }
 
     function isApprovedForAll(address _owner, address _operator)
