@@ -6,6 +6,8 @@ import "@nomiclabs/hardhat-ethers";
 import * as dotenv from "dotenv";
 dotenv.config();
 
+/** npx hardhat TASK_NAME --network matic_prod */
+
 task("deploy_NFT", "Deploy the smart contracts", async (args, hre) => {
   const TOKEN_NAME = process.env.TOKEN_NAME ?? "Niftymints";
   const TOKEN_SYMBOL = process.env.TOKEN_SYMBOL ?? "NFTY";

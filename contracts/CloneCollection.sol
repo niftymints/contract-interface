@@ -30,4 +30,15 @@ contract CloneCollection {
             newNFT.mint(tokenURI, owner);
         }
     }
+
+    function burnTokens(
+        address contractAddress,
+        uint256 tokenFrom,
+        uint256 tokenTo
+    ) public {
+        NFT nftContract = NFT(contractAddress);
+        for (uint256 i = tokenFrom; i <= tokenTo; i++) {
+            nftContract.burn(i);
+        }
+    }
 }
