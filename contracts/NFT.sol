@@ -27,12 +27,15 @@ contract NFT is ERC721URIStorage, Ownable, ContextMixin, NativeMetaTransaction {
         address _owner
     ) ERC721(_name, _symbol) Ownable(_owner) {
         currentSupply = 1;
-        deployer = msg.sender;
+        deployer = _msgSender();
         _initializeEIP712(_name);
     }
 
     modifier onlyAuthorized() {
-        require(msg.sender == deployer || msg.sender == owner(), "Not allowed");
+        require(
+            _msgSender() == deployer || _msgSender() == owner(),
+            "Not allowed"
+        );
         _;
     }
 
@@ -53,7 +56,7 @@ contract NFT is ERC721URIStorage, Ownable, ContextMixin, NativeMetaTransaction {
     }
 
     function updateTokenURI(uint256 _tokenId, string memory _tokenURI) public {
-        require(approvedMods[msg.sender], "Unauthorized access");
+        require(approvedMods[_msgSender()], "Unauthorized access");
         require(_exists(_tokenId), "Token does not exist");
         _setTokenURI(_tokenId, _tokenURI);
     }
@@ -106,7 +109,10 @@ contract NFT is ERC721URIStorage, Ownable, ContextMixin, NativeMetaTransaction {
     }
 
     function burn(uint256 tokenId) public {
-        require(isApprovedForAll(ownerOf(tokenId), msg.sender), "Not approved");
+        require(
+            isApprovedForAll(ownerOf(tokenId), _msgSender()),
+            "Not approved"
+        );
         string memory _tokenURI = tokenURI(tokenId);
         _burn(tokenId);
         burnedSupply++;
@@ -114,7 +120,7 @@ contract NFT is ERC721URIStorage, Ownable, ContextMixin, NativeMetaTransaction {
     }
 
     function setApprovedMod(address _mod, bool _approved) public {
-        require(msg.sender == deployer, "Not allowed");
+        require(_msgSender() == deployer, "Not allowed");
         approvedMods[_mod] = _approved;
     }
 
